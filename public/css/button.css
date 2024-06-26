@@ -36,8 +36,8 @@
     --nav-button-padding-y: 0.375em;
     --nav-button-border-radius: 0.375em;
     --nav-button-font-size: 17px;
-    --nav-button-hover-bg: #7A9E7E;
-    --nav-button-hover-text-color: #fff;
+    --nav-button-hover-bg: #B3EFB2;
+    --nav-button-hover-text-color: #000000;
     --nav-button-distance: 0.875em;
     /* underline */
     --underline-border-width: 0.0625em;
@@ -51,7 +51,7 @@
     display: inline-block;
     text-rendering: optimizeLegibility;
     position: absolute;
-    right: 40px;
+    right: 55px;
   }
   
   .popup input {
