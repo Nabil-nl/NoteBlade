@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+
 body{
     background-color: #E8F1F2;
     
@@ -11,3 +15,51 @@ body{
     z-index: -1;
   }
   
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; 
+    font-family:'Rubik';
+
+}
+
+
+#user-dropdown {
+    position: absolute;
+    top: 70%;
+    right: 0;
+    z-index: 1000;
+    background-color: #B3EFB2;
+    border: 1px solid #D1D5DB;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 200px;
+}
+
+#user-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#user-dropdown li {
+    margin: 0;
+}
+
+
+
+
+
+#user-dropdown svg {
+    margin-right: 8px; /* Space between icon and text */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+#user-dropdown span {
+    /* Example styles */
+    margin-right: 4px; /* Adjust spacing */
+    font-weight: 500; /* Set font weight */
+    font-family:'Rubik';
+}
