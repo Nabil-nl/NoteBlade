@@ -83,16 +83,14 @@
                         <a href="#" class="text-black hover:text-blue-700">Edit</a>
                     </div>
                     <div class="flex items-center space-x-2 mt-2">
-                        <svg class="h-6 w-6 text-green-500" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
+                    <svg class="h-6 w-6 text-green-400"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />  <circle cx="12" cy="12" r="3" /></svg>
                         <a href="#" @click="showContent = true" class="text-black hover:text-green-500">Show</a>
                     </div>
                     <!-- Modal for displaying note content -->
                     <div x-show="showContent" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-cloak>
                         <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
-                            <h2 class="text-xl font-bold mb-4">{{ $note->title }}</h2>
-                            <p>{{ $note->content }}</p>
+                            <h2 class="text-xl text-black font-bold mb-4"> title  : {{ $note->title }}</h2>
+                            <p class="text-black">Content : {{ $note->content }}</p>
                             <button @click="showContent = false" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Close</button>
                         </div>
                     </div>
