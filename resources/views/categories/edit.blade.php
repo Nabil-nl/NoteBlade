@@ -14,8 +14,12 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label for="name" class="block text-gray-700">Category Name:</label>
-                <input type="text" id="name" name="name" value="{{ $category->name }}" class="form-input mt-1 block w-full" required autofocus>
+                <label for="title" class="block text-gray-700">Category Title:</label>
+                <input type="text" id="title" name="title" value="{{ $category->title }}" class="form-input mt-1 block w-full" required autofocus>
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700">Category Description:</label>
+                <textarea id="description" name="description" class="form-textarea mt-1 block w-full" rows="4" required>{{ $category->description }}</textarea>
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Update Category</button>
         </form>
