@@ -8,18 +8,35 @@ use App\Models\Category;
 
 class NoteController extends Controller
 {
+    /**
+     * Display a listing of the notes.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $notes = Note::all();
-        return view('notes.index', compact('notes'));
+        $categories = Category::all(); // Fetch all categories
+        return view('notes.index', compact('notes', 'categories'));
     }
 
+    /**
+     * Show the form for creating a new note.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
-        $categories = Category::all(); // Fetch all categories
+        $categories = Category::all();
         return view('notes.create', compact('categories'));
     }
 
+    /**
+     * Store a newly created note in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -37,12 +54,25 @@ class NoteController extends Controller
         return redirect()->route('notes.index')->with('success', 'Note created successfully.');
     }
 
+    /**
+     * Show the form for editing the specified note.
+     *
+     * @param  \App\Models\Note  $note
+     * @return \Illuminate\View\View
+     */
     public function edit(Note $note)
     {
-        $categories = Category::all(); // Fetch all categories
+        $categories = Category::all();
         return view('notes.edit', compact('note', 'categories'));
     }
 
+    /**
+     * Update the specified note in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Note  $note
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, Note $note)
     {
         $request->validate([
@@ -60,6 +90,12 @@ class NoteController extends Controller
         return redirect()->route('notes.index')->with('success', 'Note updated successfully.');
     }
 
+    /**
+     * Remove the specified note from storage.
+     *
+     * @param  \App\Models\Note  $note
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Note $note)
     {
         $note->delete();
