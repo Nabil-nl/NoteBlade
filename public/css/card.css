@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
 .card {
     position: relative;
     width: 190px;
@@ -64,3 +67,16 @@
     box-shadow: 0px 0px 30px 0px #B3EFB2;
   }
   
+#h22{
+  background-color: #B3EFB2;
+  font-family: 'Rubik';
+  font-size: 40px;
+  
+}
+#category{
+  font-family: 'Rubik';
+
+}
+#cat2{
+  font-family: 'Rubik';
+}

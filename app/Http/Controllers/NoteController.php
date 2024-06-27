@@ -14,11 +14,12 @@ class NoteController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-    {
-        $notes = Note::all();
-        $categories = Category::all(); // Fetch all categories
-        return view('notes.index', compact('notes', 'categories'));
-    }
+{
+    $categories = Category::all();
+    $notes = Note::all(); // Fetch all notes from the database
+
+    return view('notes.index', compact('categories', 'notes'));
+}
 
     /**
      * Show the form for creating a new note.
