@@ -1,18 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\CustomAuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CustomPageController;
+
+// Home Route
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
+// Custom Page Route
+Route::middleware(['auth:sanctum', 'verified'])->get('/page', [CustomPageController::class, 'show'])->name('custom.page');
 
 // Authentication Routes
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+Route::get('/login', [CustomAuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
     ->name('login');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+Route::post('/login', [CustomAuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
@@ -23,12 +32,8 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/page', function () {
-    return view('page');
-});
+
+// Dashboard Route
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -38,3 +43,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
