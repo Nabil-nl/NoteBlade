@@ -10,9 +10,9 @@ class CreateNotesTable extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('content');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -22,4 +22,3 @@ class CreateNotesTable extends Migration
         Schema::dropIfExists('notes');
     }
 }
-

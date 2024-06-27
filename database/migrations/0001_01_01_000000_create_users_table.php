@@ -42,10 +42,21 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
+        Schema::table('users', function (Blueprint $table) {
+            if (Schema::hasColumn('users', 'two_factor_secret')) {
+                $table->dropColumn('two_factor_secret');
+            }
+            if (Schema::hasColumn('users', 'two_factor_recovery_codes')) {
+                $table->dropColumn('two_factor_recovery_codes');
+            }
+            if (Schema::hasColumn('users', 'two_factor_confirmed_at')) {
+                $table->dropColumn('two_factor_confirmed_at');
+            }
+            if (Schema::hasIndex('users', 'users_two_factor_recovery_codes_index')) {
+                $table->dropIndex('users_two_factor_recovery_codes_index');
+            }
+        });
     }
 };

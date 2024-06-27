@@ -50,8 +50,19 @@ Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
-// Route for managing notes
-Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        Route::resource('notes', NoteController::class);
+        Route::resource('categories', CategoryController::class);
+        Route::get('/search/notes', [NoteController::class, 'search'])->name('search.notes');
+});
+// cateegry 
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
 // Route for managing categories
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 // Route for searching notes
