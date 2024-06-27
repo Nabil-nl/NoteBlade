@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -25,7 +24,8 @@ class AuthenticatedSessionController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            // Customize the redirect path after login
+            return redirect()->intended('/page'); // Replace '/page' with your desired route
         }
 
         return back()->withErrors([

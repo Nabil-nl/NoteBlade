@@ -23,10 +23,10 @@
                         <span></span>
                     </div>
                 </label>
-                <ul class="absolute mt-[1.5rem] w-52 p-2 bg-base-100 rounded shadow-md z-10 hidden bg-[#B3EFB2]" id="dropdown-tomenu">
-                    <li class="p-2"><a href="#" class="block">Homepage</a></li>
-                    <li class="p-2"><a href="#" class="block">Portfolio</a></li>
-                    <li class="p-2"><a href="#" class="block">About</a></li>
+                <ul class=" absolute mt-[1.5rem] w-52 p-2 bg-base-100 rounded shadow-md z-10 hidden bg-[#B3EFB2]" id="dropdown-tomenu">
+                    <li class="p-2"><a href="" class="block">Notes</a></li>
+                    <li class="p-2"><a href="#" class="block">Catégories</a></li>
+                    <li class="p-2"><a href="#" class="block">Rechercher des Notes</a></li>
                 </ul>
             </div>
             <div>

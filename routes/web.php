@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\CustomAuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CustomPageController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\CategoryController;
 
 // Home Route
 Route::get('/', function () {
@@ -47,3 +49,10 @@ Route::middleware([
 Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+// Route for managing notes
+Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
+// Route for managing categories
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+// Route for searching notes
+Route::get('/search/notes', [NoteController::class, 'search'])->name('search.notes');
