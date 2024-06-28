@@ -1,45 +1,63 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    @vite('resources/css/app.css')
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
-
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Profile') }}
+            </h2>
         </div>
-    </div>
-</x-app-layout>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+
+                @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                    @livewire('profile.update-profile-information-form')
+
+                    <hr class="my-6 border-t-2 border-gray-300">
+                @endif
+
+                @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+                    <div class="mt-6">
+                        @livewire('profile.update-password-form')
+                    </div>
+
+                    <hr class="my-6 border-t-2 border-gray-300">
+                @endif
+
+                @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+                    <div class="mt-6">
+                        @livewire('profile.two-factor-authentication-form')
+                    </div>
+
+                    <hr class="my-6 border-t-2 border-gray-300">
+                @endif
+
+                <div class="mt-6">
+                    @livewire('profile.logout-other-browser-sessions-form')
+                </div>
+
+                @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
+                    <hr class="my-6 border-t-2 border-gray-300">
+
+                    <div class="mt-6">
+                        @livewire('profile.delete-user-form')
+                    </div>
+                @endif
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

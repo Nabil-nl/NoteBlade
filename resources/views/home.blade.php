@@ -147,7 +147,7 @@
     </section>
 
 
-    <footer class=" footer bg-white rounded-lg shadow m-4">
+    <footer class=" footer bg-[#B3EFB2] rounded-lg shadow m-4">
         <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-center">
             <span class="text-sm text-[#06070E] text-center">© 2024 <a href="#" class="hover:underline">NoteGuard™</a>. All Rights Reserved. Event-Prime</span>
             <a href="https://github.com/Nabil-nl" class="ml-4 text-[#06070E] hover:text-gray-900">

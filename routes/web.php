@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProfileController;
+
 
 // Home Route
 Route::get('/', function () {
@@ -36,15 +38,14 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest');
 
 // Dashboard Route
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('page');
     })->name('dashboard');
+    
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 });
+
 
 Route::post('/logout', [CustomAuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
