@@ -13,14 +13,21 @@ class NoteController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
+        $notes = Note::when($search, function ($query, $search) {
+            return $query->where('title', 'like', "%{$search}%")
+                ->orWhere('content', 'like', "%{$search}%");
+        })->get();
+
         $categories = Category::all();
-        $notes = Note::all();
-    
-        return view('notes.index', compact('categories', 'notes'));
+
+        return view('notes.index', compact('notes', 'categories'));
     }
-    
+
+
 
     /**
      * Show the form for creating a new note.
