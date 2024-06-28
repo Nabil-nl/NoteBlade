@@ -14,12 +14,13 @@ class NoteController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-{
-    $categories = Category::all();
-    $notes = Note::all(); // Fetch all notes from the database
-
-    return view('notes.index', compact('categories', 'notes'));
-}
+    {
+        $categories = Category::all();
+        $notes = Note::all();
+    
+        return view('notes.index', compact('categories', 'notes'));
+    }
+    
 
     /**
      * Show the form for creating a new note.
@@ -49,7 +50,7 @@ class NoteController extends Controller
         Note::create([
             'title' => $request->title,
             'content' => $request->content,
-            'category_id' => $request->category_id,
+            'category_id' => $request->category_id, // Ensure this matches the name attribute in your form
         ]);
 
         return redirect()->route('notes.index')->with('success', 'Note created successfully.');
@@ -67,39 +68,23 @@ class NoteController extends Controller
         return view('notes.edit', compact('note', 'categories'));
     }
 
-    /**
-     * Update the specified note in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(Request $request, Note $note)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'category_id' => 'nullable|exists:categories,id',
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required'
         ]);
 
-        $note->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'category_id' => $request->category_id,
-        ]);
+        $note->update($request->all());
 
         return redirect()->route('notes.index')->with('success', 'Note updated successfully.');
     }
 
-    /**
-     * Remove the specified note from storage.
-     *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Note $note)
     {
         $note->delete();
+
         return redirect()->route('notes.index')->with('success', 'Note deleted successfully.');
     }
 }
