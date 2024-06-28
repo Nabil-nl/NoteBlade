@@ -21,7 +21,20 @@
         </div>
     </aside>
 
+
     <main class="flex-1 p-[5rem]" x-data="{ showForm: false, showContent: false }">
+        <!-- search  -->
+        <div class="flex justify-center mb-8">
+            <div class="search flex items-center">
+                <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                    <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                    </g>
+                </svg>
+                <input placeholder="Search" type="search" class="input ml-2">
+            </div>
+        </div>
+        <!-- bbittom to add card  -->
         <button @click="showForm = true" title="Add Note" class="group cursor-pointer outline-none hover:rotate-90 duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24" class="stroke-green-400 fill-none group-hover:fill-green-800 group-active:stroke-green-200 group-active:fill-green-600 group-active:duration-0 duration-300">
                 <path d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z" stroke-width="1.5"></path>
@@ -63,51 +76,51 @@
             <button @click="showForm = false" class="mt-4 text-red-500 hover:underline">Cancel</button>
         </section>
 
-        
-       <!-- Displaying cards for each note -->
-<div class="grid grid-cols-4 gap-4 mt-4">
-    @foreach ($notes as $note)
-        <div class="card p-4 bg-white shadow-md rounded-lg">
-            <div class="mt-4">
-                <h2 class="text-black flex justify-center items-center " id="h22">{{ $note->title }}</h2>
-            </div>
-            <div class="flex items-center space-x-2 mt-4">
-                <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="3 6 5 6 21 6" />
-                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                </svg>
-                <form method="POST" action="{{ route('notes.destroy', $note->id) }}" onsubmit="return confirm('Are you sure you want to delete this note?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-black hover:text-red-500">Delete</button>
-                </form>
-            </div>
-            <div class="flex items-center space-x-2 mt-2">
-                <svg class="h-6 w-6 text-blue-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                </svg>
-                <a href="{{ route('notes.edit', $note->id) }}" class="text-black hover:text-blue-700">Edit</a>
-            </div>
-            <div class="flex items-center space-x-2 mt-2">
-                <svg class="h-6 w-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                </svg>
-                <a href="#" @click="showContent = {{ $note->id }}" class="text-black hover:text-green-500">Show</a>
-            </div>
-            <!-- Modal for displaying note content -->
-            <div x-show="showContent === {{ $note->id }}" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-cloak>
-                <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
-                    <h2 class="text-xl text-black font-bold mb-4">{{ $note->title }}</h2>
-                    <p class="text-black">Content: {{ $note->content }}</p>
-                    <p class="text-black">Category: <span class="font-bold">{{ optional($note->category)->title }}</span></p>
-                    <button @click="showContent = null" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Close</button>
+
+        <!-- Displaying cards for each note -->
+        <div class="grid grid-cols-4 gap-4 mt-4">
+            @foreach ($notes as $note)
+            <div class="card p-4 bg-white shadow-md rounded-lg">
+                <div class="mt-4">
+                    <h2 class="text-black flex justify-center items-center " id="h22">{{ $note->title }}</h2>
+                </div>
+                <div class="flex items-center space-x-2 mt-4">
+                    <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                    </svg>
+                    <form method="POST" action="{{ route('notes.destroy', $note->id) }}" onsubmit="return confirm('Are you sure you want to delete this note?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-black hover:text-red-500">Delete</button>
+                    </form>
+                </div>
+                <div class="flex items-center space-x-2 mt-2">
+                    <svg class="h-6 w-6 text-blue-700" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                    <a href="{{ route('notes.edit', $note->id) }}" class="text-black hover:text-blue-700">Edit</a>
+                </div>
+                <div class="flex items-center space-x-2 mt-2">
+                    <svg class="h-6 w-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <a href="#" @click="showContent = {{ $note->id }}" class="text-black hover:text-green-500">Show</a>
+                </div>
+                <!-- Modal for displaying note content -->
+                <div x-show="showContent === {{ $note->id }}" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50" x-cloak>
+                    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+                        <h2 class="text-xl text-black font-bold mb-4">{{ $note->title }}</h2>
+                        <p class="text-black">Content: {{ $note->content }}</p>
+                        <p class="text-black">Category: <span class="font-bold">{{ optional($note->category)->title }}</span></p>
+                        <button @click="showContent = null" class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Close</button>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
-    @endforeach
-</div>
 
 
 
