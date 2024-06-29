@@ -64,3 +64,31 @@ body{
     font-weight: 500; /* Set font weight */
     font-family:'Rubik';
 }
+@keyframes typing {
+    0% {
+        width: 0;
+        visibility: visible;
+    }
+    50% {
+        width: 100%;
+    }
+    100% {
+        width: 0;
+    }
+  }
+  
+  @keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: rgb(255, 0, 0);
+    }
+  }
+  
+  .animate-typing {
+    animation: typing 8s steps(22, end) infinite, blink .75s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 4px solid #B3EFB2;
+  }
