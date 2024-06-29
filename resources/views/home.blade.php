@@ -8,6 +8,7 @@
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     <link href="{{ asset('css/button.css') }}" rel="stylesheet">
     <link href="{{ asset('css/container.css') }}" rel="stylesheet">
+    
 </head>
 
 <body class="overflow-x-hidden">
@@ -53,9 +54,15 @@
     </nav>
     <!-- animation text  -->
 
-    <div class="flex-grow flex items-start  overflow-hidden w-[680px]">
-        <img src="{{ asset('image/nabil.svg') }}" class="w-full h-auto max-w-full" alt="Your Image">
-
+    <div class="flex-grow flex items-start mt-[68px] ">
+        <img src="{{ asset('image/nabil.svg')}}" class="w-[900px] h-[580px] mr-10 " alt="Your Image">
+        <div class="flex items-center justify-center   mt-52 ">
+            <div class="">
+                <h1 class="animate-typing overflow-hidden whitespace-nowrap text-5xl text-[#1B1F3B] font-bold">
+                    Welcome to NoteGuard !
+                </h1>
+            </div>
+        </div>
     </div>
 
     <!-- botton animation -->
