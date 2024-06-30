@@ -68,3 +68,4 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 // Route for searching notes
 Route::get('/search/notes', [NoteController::class, 'search'])->name('search.notes');
+

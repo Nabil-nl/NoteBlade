@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Note;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
-    /**
-     * Display a listing of the notes.
-     *
-     * @return \Illuminate\View\View
-     */
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -27,25 +23,12 @@ class NoteController extends Controller
         return view('notes.index', compact('notes', 'categories'));
     }
 
-
-
-    /**
-     * Show the form for creating a new note.
-     *
-     * @return \Illuminate\View\View
-     */
     public function create()
     {
         $categories = Category::all();
         return view('notes.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created note in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -54,21 +37,25 @@ class NoteController extends Controller
             'category_id' => 'nullable|exists:categories,id',
         ]);
 
+        $user_id = Auth::id(); // Retrieve the authenticated user's ID
+
+        // Debugging: Check if the user ID is correctly retrieved
+        if (!$user_id) {
+            return redirect()->route('notes.index')->with('error', 'User is not authenticated.');
+        }
+
         Note::create([
             'title' => $request->title,
             'content' => $request->content,
-            'category_id' => $request->category_id, // Ensure this matches the name attribute in your form
+            'category_id' => $request->category_id,
+            'user_id' => $user_id, // Associate the note with the authenticated user
         ]);
 
         return redirect()->route('notes.index')->with('success', 'Note created successfully.');
     }
 
-    /**
-     * Show the form for editing the specified note.
-     *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\View\View
-     */
+
+
     public function edit(Note $note)
     {
         $categories = Category::all();

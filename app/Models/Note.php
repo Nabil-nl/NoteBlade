@@ -9,7 +9,7 @@ class Note extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'title', 'content'];
+    protected $fillable = ['category_id', 'title', 'content' ,'user_id'];
 
     public function category()
     {
