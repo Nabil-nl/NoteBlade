@@ -12,11 +12,15 @@ class NoteController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $user_id = Auth::id(); // Get the authenticated user's ID
 
-        $notes = Note::when($search, function ($query, $search) {
-            return $query->where('title', 'like', "%{$search}%")
-                ->orWhere('content', 'like', "%{$search}%");
-        })->get();
+        $notes = Note::where('user_id', $user_id) // Filter by user_id
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('content', 'like', "%{$search}%");
+                });
+            })->get();
 
         $categories = Category::all();
 
@@ -37,24 +41,17 @@ class NoteController extends Controller
             'category_id' => 'nullable|exists:categories,id',
         ]);
 
-        $user_id = Auth::id(); // Retrieve the authenticated user's ID
-
-        // Debugging: Check if the user ID is correctly retrieved
-        if (!$user_id) {
-            return redirect()->route('notes.index')->with('error', 'User is not authenticated.');
-        }
+        $user_id = Auth::id();
 
         Note::create([
             'title' => $request->title,
             'content' => $request->content,
             'category_id' => $request->category_id,
-            'user_id' => $user_id, // Associate the note with the authenticated user
+            'user_id' => $user_id,
         ]);
 
         return redirect()->route('notes.index')->with('success', 'Note created successfully.');
     }
-
-
 
     public function edit(Note $note)
     {
