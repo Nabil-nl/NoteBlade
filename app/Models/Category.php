@@ -9,10 +9,15 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['title', 'description', 'user_id'];
 
     public function notes()
     {
         return $this->hasMany(Note::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
